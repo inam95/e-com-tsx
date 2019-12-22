@@ -3,15 +3,20 @@ import React from "react";
 import { Section } from "../../models/HomePage";
 
 import "./menu-item.styles.scss";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
-interface MenuItemProps {
+interface MenuItemProps extends RouteComponentProps {
   menuItem: Section;
 }
 
-export const MenuItem: React.FC<MenuItemProps> = props => {
-  const { title, imageUrl, size } = props.menuItem;
+const _MenuItem: React.FC<MenuItemProps> = props => {
+  const { title, imageUrl, size, linkUrl } = props.menuItem;
+  const { match, history } = props;
   return (
-    <div className={`${size} menu-item`}>
+    <div
+      className={`${size} menu-item`}
+      onClick={() => history.push(`${match.url}${linkUrl}`)}
+    >
       <div
         className="background-image"
         style={{
@@ -25,3 +30,5 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
     </div>
   );
 };
+
+export const MenuItem = withRouter(_MenuItem);
