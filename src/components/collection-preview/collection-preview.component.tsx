@@ -1,24 +1,28 @@
 import React from "react";
 
-import "./collection-preview.styles.scss";
-import { Collection } from "../../models/ShopPage";
+import { Item } from "../../models/ShopPage";
+
 import { CollectionItem } from "../collection-item/collection-item.component";
+
+import "./collection-preview.styles.scss";
 
 interface CollectionPreviewProps {
   title: string;
-  collectionItems: Collection[];
+  items: Item[];
 }
 
-export const CollectionPreview: React.FC<CollectionPreviewProps> = props => {
-  const { title, collectionItems } = props;
+export const CollectionPreview: React.FC<CollectionPreviewProps> = (
+  props: CollectionPreviewProps
+) => {
+  const { title, items } = props;
   return (
     <div className="collection-preview">
       <h1 className="title">{title.toLocaleUpperCase()}</h1>
       <div className="preview">
-        {collectionItems
-          .filter((collectionItem, index) => index < 4)
-          .map((collectionItem, index) => (
-            <CollectionItem key={collectionItem.id} item={collectionItem.} />
+        {items
+          .filter((_, index) => index < 4)
+          .map(item => (
+            <CollectionItem key={item.id} item={item} />
           ))}
       </div>
     </div>

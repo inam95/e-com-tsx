@@ -9,7 +9,7 @@ interface MenuItemProps extends RouteComponentProps {
   menuItem: Section;
 }
 
-const _MenuItem: React.FC<MenuItemProps> = props => {
+const _MenuItem: React.FC<MenuItemProps> = (props: MenuItemProps) => {
   const { title, imageUrl, size, linkUrl } = props.menuItem;
   const { match, history } = props;
   return (
