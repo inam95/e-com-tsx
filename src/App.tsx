@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
 import {
   auth,
@@ -11,15 +12,19 @@ import { ShopPage } from "./pages/shop/shop.componment";
 import { Header } from "./components/header/header.component";
 import { SignInAndSignUpPage } from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
+import { setCurrentUser } from "./redux/user/user.action";
+
 import { UserAuthModel } from "./models/Auth";
 
 import "./App.css";
 
-interface AppProps {}
+interface AppProps {
+  setCurrentUser(): Function;
+}
 interface AppState {
   currentUser: UserAuthModel | null;
 }
-export class App extends React.Component<AppProps, AppState> {
+class _App extends React.Component<AppProps, AppState> {
   constructor(pops: AppProps) {
     super(pops);
 
@@ -64,7 +69,7 @@ export class App extends React.Component<AppProps, AppState> {
   render() {
     return (
       <div>
-        <Header currentUser={this.state.currentUser} />
+        <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
@@ -74,3 +79,5 @@ export class App extends React.Component<AppProps, AppState> {
     );
   }
 }
+
+export const App = connect(null, { setCurrentUser })(_App);

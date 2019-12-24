@@ -26,13 +26,13 @@ export class SignIn extends React.Component<SignInProps, SignInState> {
 
   handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
-  ): Promise<any> => {
+  ): Promise<void> => {
     event.preventDefault();
 
     const { email, password } = this.state;
 
     try {
-      await auth.signInWithEmailAndPassword(email, password).then();
+      await auth.signInWithEmailAndPassword(email, password);
       this.setState({ email: "", password: "" });
     } catch (error) {
       console.log(error);
