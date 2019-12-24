@@ -1,4 +1,4 @@
-export interface Section {
+export interface SectionModel {
   title: string;
   imageUrl: string;
   id: number;

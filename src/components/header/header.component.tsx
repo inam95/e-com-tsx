@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg.svg";
 import "./header.styles.scss";
 import { auth } from "../../services/firebase/firebase.util";
+import { UserAuthModel } from "../../models/Auth";
 
 interface HeaderProps {
-  currentUser: firebase.User | null;
+  currentUser: UserAuthModel | null;
 }
 
 export const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
@@ -23,7 +24,6 @@ export const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
         <Link className="option" to="/contact">
           CONTACT
         </Link>
-        <Link className="option" to="/contact"></Link>
         {currentUser ? (
           <div className="option" onClick={() => auth.signOut()}>
             SIGN OUT

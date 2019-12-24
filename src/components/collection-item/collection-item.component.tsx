@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Item } from "../../models/ShopPage";
+import { ItemModel } from "../../models/ShopPage";
 
 import "./collection-item.styles.scss";
 
 interface CollectionItemProps {
-  item: Item;
+  item: ItemModel;
 }
 
 export const CollectionItem: React.FC<CollectionItemProps> = (

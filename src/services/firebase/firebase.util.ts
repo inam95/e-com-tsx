@@ -38,6 +38,8 @@ export const createUserPropfileDocument = async (
       console.log("error creating user", error);
     }
   }
+
+  return userRef;
 };
 
 firebase.initializeApp(config);

@@ -11,11 +11,13 @@ import { ShopPage } from "./pages/shop/shop.componment";
 import { Header } from "./components/header/header.component";
 import { SignInAndSignUpPage } from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
+import { UserAuthModel } from "./models/Auth";
+
 import "./App.css";
 
 interface AppProps {}
 interface AppState {
-  currentUser: firebase.User | null;
+  currentUser: UserAuthModel | null;
 }
 export class App extends React.Component<AppProps, AppState> {
   constructor(pops: AppProps) {
@@ -29,9 +31,30 @@ export class App extends React.Component<AppProps, AppState> {
   private unsubscribeFromAuth: firebase.Unsubscribe = () => {};
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
-      createUserPropfileDocument(user);
-    });
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(
+      async (userAuth: firebase.User | null) => {
+        if (userAuth) {
+          const userRef = await createUserPropfileDocument(userAuth);
+          userRef?.onSnapshot(
+            (
+              snapShot: firebase.firestore.DocumentSnapshot<
+                firebase.firestore.DocumentData
+              >
+            ) => {
+              this.setState({
+                currentUser: {
+                  id: snapShot.id,
+                  data: snapShot.data()
+                }
+              });
+              console.log(this.state);
+            }
+          );
+        } else {
+          this.setState({ currentUser: userAuth });
+        }
+      }
+    );
   }
 
   componentWillUnmount() {

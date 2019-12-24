@@ -1,12 +1,12 @@
 import React from "react";
 
-import { Section } from "../../models/HomePage";
+import { SectionModel } from "../../models/HomePage";
 
 import "./menu-item.styles.scss";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
 interface MenuItemProps extends RouteComponentProps {
-  menuItem: Section;
+  menuItem: SectionModel;
 }
 
 const _MenuItem: React.FC<MenuItemProps> = (props: MenuItemProps) => {

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Collection } from "../../models/ShopPage";
+import { CollectionModel } from "../../models/ShopPage";
 
 import { CollectionPreview } from "../../components/collection-preview/collection-preview.component";
 
@@ -9,7 +9,7 @@ import { SHOP_DATA } from "./shop.data";
 interface ShopPageProps {}
 
 interface ShopPageState {
-  collections: Collection[];
+  collections: CollectionModel[];
 }
 
 export class ShopPage extends React.Component<ShopPageProps, ShopPageState> {

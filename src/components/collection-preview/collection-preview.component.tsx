@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Item } from "../../models/ShopPage";
+import { ItemModel } from "../../models/ShopPage";
 
 import { CollectionItem } from "../collection-item/collection-item.component";
 
@@ -8,7 +8,7 @@ import "./collection-preview.styles.scss";
 
 interface CollectionPreviewProps {
   title: string;
-  items: Item[];
+  items: ItemModel[];
 }
 
 export const CollectionPreview: React.FC<CollectionPreviewProps> = (

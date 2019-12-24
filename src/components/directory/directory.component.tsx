@@ -3,12 +3,12 @@ import React from "react";
 import "./directory.styles.scss";
 import { MenuItem } from "../menu-item/menu-item.component";
 
-import { Section } from "../../models/HomePage";
+import { SectionModel } from "../../models/HomePage";
 
 interface DirectoryProps {}
 
 interface DirectoryState {
-  sections: Section[];
+  sections: SectionModel[];
 }
 
 export class Directory extends React.Component<DirectoryProps, DirectoryState> {
@@ -57,7 +57,7 @@ export class Directory extends React.Component<DirectoryProps, DirectoryState> {
     const { sections } = this.state;
     return (
       <div className="directory-menu">
-        {sections.map((s: Section, index: number) => (
+        {sections.map((s: SectionModel) => (
           <MenuItem menuItem={s} key={s.id} />
         ))}
       </div>
