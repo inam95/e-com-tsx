@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { StoreState } from "../../redux/root-reducer";
 
 interface HeaderStoreProps {
-  currentUser: UserAuthModel | null;
+  currentUser?: UserAuthModel | null;
 }
 
 interface HeaderProps extends HeaderStoreProps {}
@@ -26,7 +26,6 @@ class _Header extends React.Component<HeaderProps> {
   };
   render() {
     const { currentUser } = this.props;
-    console.log(currentUser);
     return (
       <div className="header">
         <Link className="logo-container" to="/">
@@ -54,9 +53,9 @@ class _Header extends React.Component<HeaderProps> {
   }
 }
 
-const mapStateToProps = (state: StoreState) => {
+const mapStateToProps = ({ user }: StoreState) => {
   return {
-    user: state.user.currentUser
+    currentUser: user.currentUser
   };
 };
 

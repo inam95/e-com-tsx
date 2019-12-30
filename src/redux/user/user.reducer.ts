@@ -1,6 +1,6 @@
 import { UserAuthModel } from "../../models/Auth";
 
-import { ActionTypes, SetCurrentUserAction } from "./types";
+import { ActionTypes, SetCurrentUserAction } from "./user.types";
 
 export interface InitState {
   currentUser?: UserAuthModel | null;

@@ -1,6 +1,7 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
 import {
   auth,
@@ -17,25 +18,22 @@ import { setCurrentUser } from "./redux/user/user.action";
 import { UserAuthModel } from "./models/Auth";
 
 import "./App.css";
+import { SetCurrentUserAction } from "./redux/user/user.types";
+import { StoreState } from "./redux/root-reducer";
 
-interface AppProps {
-  setCurrentUser(): Function;
+interface AppStoreProps {
+  currentUser?: UserAuthModel | null;
 }
-interface AppState {
-  currentUser: UserAuthModel | null;
+interface AppProps extends AppStoreProps {
+  setCurrentUser: Function;
 }
-class _App extends React.Component<AppProps, AppState> {
-  constructor(pops: AppProps) {
-    super(pops);
 
-    this.state = {
-      currentUser: null
-    };
-  }
-
+class _App extends React.Component<AppProps> {
   private unsubscribeFromAuth: firebase.Unsubscribe = () => {};
 
   componentDidMount() {
+    const { setCurrentUser } = this.props;
+
     this.unsubscribeFromAuth = auth.onAuthStateChanged(
       async (userAuth: firebase.User | null) => {
         if (userAuth) {
@@ -46,17 +44,17 @@ class _App extends React.Component<AppProps, AppState> {
                 firebase.firestore.DocumentData
               >
             ) => {
-              this.setState({
+              setCurrentUser({
                 currentUser: {
                   id: snapShot.id,
                   data: snapShot.data()
                 }
               });
-              console.log(this.state);
             }
           );
         } else {
-          this.setState({ currentUser: userAuth });
+          setCurrentUser(userAuth);
+          console.log(userAuth);
         }
       }
     );
@@ -73,11 +71,30 @@ class _App extends React.Component<AppProps, AppState> {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
-          <Route path="/signin" component={SignInAndSignUpPage} />
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              this.props.currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <SignInAndSignUpPage />
+              )
+            }
+          />
         </Switch>
       </div>
     );
   }
 }
 
-export const App = connect(null, { setCurrentUser })(_App);
+const mapStateToProps = ({ user }: StoreState) => ({
+  currentUser: user.currentUser
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setCurrentUser: (user: UserAuthModel | null) =>
+    dispatch<SetCurrentUserAction>(setCurrentUser(user))
+});
+
+export const App = connect(mapStateToProps, mapDispatchToProps)(_App);

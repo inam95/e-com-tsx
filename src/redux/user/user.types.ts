@@ -1,7 +1,7 @@
 import { UserAuthModel } from "../../models/Auth";
 
 export enum ActionTypes {
-  setCurrentUser
+  setCurrentUser = "SET_CURRENT_USER"
 }
 
 export interface SetCurrentUserAction {
