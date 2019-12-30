@@ -2,12 +2,12 @@ import { UserAuthModel } from "../../models/Auth";
 
 import { ActionTypes, SetCurrentUserAction } from "./user.types";
 
-export interface InitState {
+export interface InitStateUser {
   currentUser?: UserAuthModel | null;
 }
 
 export const userReducer = (
-  state: InitState = {},
+  state: InitStateUser = {},
   action: SetCurrentUserAction
 ) => {
   switch (action.type) {

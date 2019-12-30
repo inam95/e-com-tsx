@@ -1,10 +1,13 @@
 import { combineReducers } from "redux";
-import { userReducer, InitState } from "./user/user.reducer";
+import { userReducer, InitStateUser } from "./user/user.reducer";
+import { initStateCart, cartReducer } from "./cart/cart.reducer";
 
 export interface StoreState {
-  user: InitState;
+  user: InitStateUser;
+  cart: initStateCart;
 }
 
 export const reducers = combineReducers<StoreState>({
-  user: userReducer
+  user: userReducer,
+  cart: cartReducer
 });
