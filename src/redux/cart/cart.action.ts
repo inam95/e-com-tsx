@@ -1,5 +1,15 @@
-import { ActionTypes } from "./cart.types";
+import {
+  ActionTypes,
+  ToggleCartHiddenAction,
+  AddItemAction
+} from "./cart.types";
+import { ItemModel } from "../../models/ShopPage";
 
-export const toggleCartHidden = () => ({
+export const toggleCartHidden = (): ToggleCartHiddenAction => ({
   type: ActionTypes.toggleCartHidden
+});
+
+export const addItem = (item: ItemModel): AddItemAction => ({
+  type: ActionTypes.addItem,
+  payload: item
 });
