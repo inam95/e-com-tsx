@@ -20,6 +20,8 @@ import { UserAuthModel } from "./models/Auth";
 import "./App.css";
 import { SetCurrentUserAction } from "./redux/user/user.types";
 import { StoreState } from "./redux/root-reducer";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "./redux/user/user.selector";
 
 interface AppStoreProps {
   currentUser?: UserAuthModel | null;
@@ -30,6 +32,10 @@ interface AppProps extends AppStoreProps {
 
 class _App extends React.Component<AppProps> {
   private unsubscribeFromAuth: firebase.Unsubscribe = () => {};
+
+  static defaultProps = {
+    setCurrentUser: () => {}
+  };
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
@@ -88,8 +94,12 @@ class _App extends React.Component<AppProps> {
   }
 }
 
-const mapStateToProps = ({ user }: StoreState) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector<
+  StoreState,
+  AppProps,
+  AppStoreProps
+>({
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

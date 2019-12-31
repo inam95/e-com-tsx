@@ -7,6 +7,7 @@ import { StoreState } from "../../redux/root-reducer";
 import { ItemModel } from "../../models/ShopPage";
 import { CartItem } from "../cart-item/cart-item.component";
 import { selectCartItems } from "../../redux/cart/cart.selector";
+import { createStructuredSelector } from "reselect";
 
 interface CartDropdownStoreProps {
   cartItems: ItemModel[];
@@ -31,8 +32,10 @@ const _CartDropdown: React.FC<CartDropdownProps> = (
   );
 };
 
-const mapStateToProps = (state: StoreState) => ({
-  cartItems: selectCartItems(state)
-});
+const mapStateToProps = createStructuredSelector<StoreState, CartDropdownProps>(
+  {
+    cartItems: selectCartItems
+  }
+);
 
 export const CartDropdown = connect(mapStateToProps)(_CartDropdown);

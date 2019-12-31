@@ -10,10 +10,13 @@ import { UserAuthModel } from "../../models/Auth";
 import { connect } from "react-redux";
 import { StoreState } from "../../redux/root-reducer";
 import { CartDropdown } from "../cart-dropdown/cart-dropdown.component";
+import { selectCurrentUser } from "../../redux/user/user.selector";
+import { selectCartHidden } from "../../redux/cart/cart.selector";
+import { createStructuredSelector } from "reselect";
 
 interface HeaderStoreProps {
   currentUser?: UserAuthModel | null;
-  hiddenCart: boolean;
+  hiddenCart?: boolean;
 }
 
 interface HeaderProps extends HeaderStoreProps {}
@@ -49,11 +52,9 @@ const _Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   );
 };
 
-const mapStateToProps = ({ user, cart }: StoreState) => {
-  return {
-    currentUser: user.currentUser,
-    hiddenCart: cart.hidden
-  };
-};
+const mapStateToProps = createStructuredSelector<StoreState, HeaderProps>({
+  currentUser: selectCurrentUser,
+  hiddenCart: selectCartHidden
+});
 
 export const Header = connect(mapStateToProps)(_Header);
