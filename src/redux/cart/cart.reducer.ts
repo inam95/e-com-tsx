@@ -1,5 +1,6 @@
 import { ActionTypes, Action } from "./cart.types";
 import { ItemModel } from "../../models/ShopPage";
+import { addItemToCart } from "../../utils/cart.utils";
 
 export interface initStateCart {
   hidden: boolean;
@@ -21,7 +22,7 @@ export const cartReducer = (state = INITIAL_STATE, action: Action) => {
     case ActionTypes.addItem:
       return {
         ...state,
-        cartItems: [...state.cartItems, action.payload]
+        cartItems: addItemToCart(state.cartItems, action.payload)
       };
     default:
       return state;

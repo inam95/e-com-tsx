@@ -3,6 +3,7 @@ export interface ItemModel {
   id: number;
   imageUrl: string;
   price: number;
+  quantity: number;
 }
 
 export interface CollectionModel {
