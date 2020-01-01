@@ -22,6 +22,7 @@ import { SetCurrentUserAction } from "./redux/user/user.types";
 import { StoreState } from "./redux/root-reducer";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "./redux/user/user.selector";
+import { CheckoutPage } from "./pages/checkout/checkout.component";
 
 interface AppStoreProps {
   currentUser?: UserAuthModel | null;
@@ -88,6 +89,7 @@ class _App extends React.Component<AppProps> {
               )
             }
           />
+          <Route path="/checkout" component={CheckoutPage} />
         </Switch>
       </div>
     );

@@ -33,7 +33,7 @@ class _CartIcon extends React.Component<CartIconProps> {
   }
 }
 
-const mapDispatchToState = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   toggleCartHidden: () => dispatch(toggleCartHidden())
 });
 
@@ -45,4 +45,4 @@ const mapStateToProps = createStructuredSelector<
   itemCount: selectCartItemsCount
 });
 
-export const CartIcon = connect(mapStateToProps, mapDispatchToState)(_CartIcon);
+export const CartIcon = connect(mapStateToProps, mapDispatchToProps)(_CartIcon);

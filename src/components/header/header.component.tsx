@@ -9,7 +9,7 @@ import { auth } from "../../services/firebase/firebase.util";
 import { UserAuthModel } from "../../models/Auth";
 import { connect } from "react-redux";
 import { StoreState } from "../../redux/root-reducer";
-import { CartDropdown } from "../cart-dropdown/cart-dropdown.component";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 import { selectCartHidden } from "../../redux/cart/cart.selector";
 import { createStructuredSelector } from "reselect";

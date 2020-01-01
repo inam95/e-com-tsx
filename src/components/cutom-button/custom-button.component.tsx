@@ -13,6 +13,8 @@ export const CustomButton: React.FC<CustomButtonProps> = (
   props: CustomButtonProps
 ) => {
   const { children, isGoogleSignIn, inverted, ...otherProps } = props;
+  console.log(otherProps);
+
   return (
     <button
       className={`${inverted ? "inverted" : ""} ${
