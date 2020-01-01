@@ -1,7 +1,8 @@
 import {
   ActionTypes,
   ToggleCartHiddenAction,
-  AddItemAction
+  AddItemAction,
+  ClearItemFromCart
 } from "./cart.types";
 import { ItemModel } from "../../models/ShopPage";
 
@@ -12,4 +13,9 @@ export const toggleCartHidden = (): ToggleCartHiddenAction => ({
 export const addItem = (item: ItemModel): AddItemAction => ({
   type: ActionTypes.addItem,
   payload: item
+});
+
+export const clearItemFromCart = (item: ItemModel): ClearItemFromCart => ({
+  type: ActionTypes.clearItemFromCart,
+  paylod: item.id
 });

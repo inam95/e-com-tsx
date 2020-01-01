@@ -10,7 +10,6 @@ import {
   selectCartTotal
 } from "../../redux/cart/cart.selector";
 import { ItemModel } from "../../models/ShopPage";
-import { CartItem } from "../../components/cart-item/cart-item.component";
 import { CheckoutItem } from "../../components/checkout-item/checkout-item.component";
 
 interface CheckoutPageStoreProps {

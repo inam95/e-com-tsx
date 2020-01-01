@@ -2,12 +2,12 @@ import { ItemModel } from "../../models/ShopPage";
 
 export enum ActionTypes {
   toggleCartHidden = "TOGGLE_CART_HIDDEN",
-  addItem = "ADD_ITEM"
+  addItem = "ADD_ITEM",
+  clearItemFromCart = "CLEAR_ITEM_FROM_CART"
 }
 
 export interface ToggleCartHiddenAction {
   type: ActionTypes.toggleCartHidden;
-  // paylaod: boolean;
 }
 
 export interface AddItemAction {
@@ -15,4 +15,9 @@ export interface AddItemAction {
   payload: ItemModel;
 }
 
-export type Action = ToggleCartHiddenAction | AddItemAction;
+export interface ClearItemFromCart {
+  type: ActionTypes.clearItemFromCart;
+  paylod: number;
+}
+
+export type Action = ToggleCartHiddenAction | AddItemAction | ClearItemFromCart;
