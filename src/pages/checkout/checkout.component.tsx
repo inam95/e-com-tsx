@@ -42,7 +42,6 @@ const _CheckoutPage: React.FC<CheckoutPageProps> = (
         <div className="header-block">
           <span>Remove</span>
         </div>
-        <div className="header-block"></div>
       </div>
       {cartItems.map(cartItem => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />

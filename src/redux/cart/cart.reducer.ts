@@ -1,6 +1,6 @@
 import { ActionTypes, Action } from "./cart.types";
 import { ItemModel } from "../../models/ShopPage";
-import { addItemToCart } from "../../utils/cart.utils";
+import { addItemToCart, removeItemFromCart } from "../../utils/cart.utils";
 
 export interface initStateCart {
   hidden: boolean;
@@ -30,6 +30,11 @@ export const cartReducer = (state = INITIAL_STATE, action: Action) => {
         cartItems: state.cartItems.filter(
           (CartItem: ItemModel) => CartItem.id !== action.paylod
         )
+      };
+    case ActionTypes.removeItem:
+      return {
+        ...state,
+        cartItems: removeItemFromCart(state.cartItems, action.payload)
       };
     default:
       return state;

@@ -16,26 +16,20 @@ interface CartDropdownStoreProps {
   cartItems: ItemModel[];
 }
 
-interface CartDropdownProps
-  extends CartDropdownStoreProps
-     {
+interface CartDropdownProps extends CartDropdownStoreProps {
   toggleCartHidden: Function;
 }
 
-class CartDropdown extends React.Component<CartDropdownProps & RouteComponentProps> {
+class CartDropdown extends React.Component<
+  CartDropdownProps & RouteComponentProps<{}> & { dispatch: Dispatch }
+> {
   static defaultProps = {
     toggleCartHidden: () => {},
     cartItems: []
   };
 
-  handleRouteOnclick = () => {
-    const { history, toggleCartHidden } = this.props;
-    history.push("/checkout");
-    toggleCartHidden();
-  };
-
   render() {
-    const { cartItems } = this.props;
+    const { cartItems, history, dispatch } = this.props;
     return (
       <div className="cart-dropdown">
         <div className="cart-items">
@@ -47,17 +41,18 @@ class CartDropdown extends React.Component<CartDropdownProps & RouteComponentPro
             <span className="empty-message">Your cart is empty</span>
           )}
         </div>
-        <CustomButton onClick={() => this.handleRouteOnclick()}>
+        <CustomButton
+          onClick={() => {
+            history.push("/checkout");
+            dispatch(toggleCartHidden());
+          }}
+        >
           GO TO CHECKOUT
         </CustomButton>
       </div>
     );
   }
 }
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  toggleCartHidden: () => dispatch(toggleCartHidden())
-});
 
 const mapStateToProps = createStructuredSelector<
   StoreState,
@@ -67,6 +62,4 @@ const mapStateToProps = createStructuredSelector<
   cartItems: selectCartItems
 });
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(CartDropdown)
-);
+export default withRouter(connect(mapStateToProps)(CartDropdown));
