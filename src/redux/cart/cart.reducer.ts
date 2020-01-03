@@ -2,12 +2,12 @@ import { ActionTypes, Action } from "./cart.types";
 import { ItemModel } from "../../models/ShopPage";
 import { addItemToCart, removeItemFromCart } from "../../utils/cart.utils";
 
-export interface initStateCart {
+export interface InitStateCart {
   hidden: boolean;
   cartItems: ItemModel[];
 }
 
-const INITIAL_STATE: initStateCart = {
+const INITIAL_STATE: InitStateCart = {
   hidden: true,
   cartItems: []
 };

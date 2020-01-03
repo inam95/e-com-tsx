@@ -1,12 +1,17 @@
 import { combineReducers } from "redux";
 import { userReducer, InitStateUser } from "./user/user.reducer";
-import { initStateCart, cartReducer } from "./cart/cart.reducer";
+import { InitStateCart, cartReducer } from "./cart/cart.reducer";
 import { PersistConfig, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import {
+  directoryReducer,
+  InitStateDirectory
+} from "./directory/directory.reducer";
 
 export interface StoreState {
   user: InitStateUser;
-  cart: initStateCart;
+  cart: InitStateCart;
+  directory: InitStateDirectory;
 }
 
 const persistConfig: PersistConfig<StoreState> = {
@@ -17,7 +22,8 @@ const persistConfig: PersistConfig<StoreState> = {
 
 const reducers = combineReducers<StoreState>({
   user: userReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  directory: directoryReducer
 });
 
 export default persistReducer(persistConfig, reducers);
