@@ -7,11 +7,13 @@ import {
   directoryReducer,
   InitStateDirectory
 } from "./directory/directory.reducer";
+import { InitStateShop, shopreducer } from "./shop/shop.reducer";
 
 export interface StoreState {
   user: InitStateUser;
   cart: InitStateCart;
   directory: InitStateDirectory;
+  shop: InitStateShop;
 }
 
 const persistConfig: PersistConfig<StoreState> = {
@@ -23,7 +25,8 @@ const persistConfig: PersistConfig<StoreState> = {
 const reducers = combineReducers<StoreState>({
   user: userReducer,
   cart: cartReducer,
-  directory: directoryReducer
+  directory: directoryReducer,
+  shop: shopreducer
 });
 
 export default persistReducer(persistConfig, reducers);

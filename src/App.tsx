@@ -61,7 +61,6 @@ class _App extends React.Component<AppProps> {
           );
         } else {
           setCurrentUser(userAuth);
-          console.log(userAuth);
         }
       }
     );
