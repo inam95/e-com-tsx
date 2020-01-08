@@ -12,3 +12,11 @@ export interface CollectionModel {
   routeName: string;
   items: ItemModel[];
 }
+
+export interface CollectionsModel {
+  hats: CollectionModel;
+  sneakers: CollectionModel;
+  jackets: CollectionModel;
+  womens: CollectionModel;
+  mens: CollectionModel;
+}

@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { StoreState } from "../../redux/root-reducer";
 import { CollectionModel } from "../../models/ShopPage";
 import { selectCollection } from "../../redux/shop/shop.selector";
+import { CollectionItem } from "../../components/collection-item/collection-item.component";
 
 interface MatchParams {
   collectionId: string;
@@ -21,13 +22,16 @@ const _CollectionPage: React.FC<CollectionPageProps &
   RouteComponentProps<MatchParams>> = (
   props: CollectionPageProps & RouteComponentProps<MatchParams>
 ) => {
-  const { collection } = props;
-
-  console.log(collection);
+  const { title, items } = props.collection!;
 
   return (
     <div className="collection-page">
-      <h2>Category</h2>
+      <h2 className="title">{title}</h2>
+      <div className="items">
+        {items.map(item => (
+          <CollectionItem key={item.id} item={item} />
+        ))}
+      </div>
     </div>
   );
 };

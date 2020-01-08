@@ -1,8 +1,8 @@
 import { SHOP_DATA } from "../../pages/shop/shop.data";
-import { CollectionModel } from "../../models/ShopPage";
+import { CollectionsModel } from "../../models/ShopPage";
 
 export interface InitStateShop {
-  collections: CollectionModel[];
+  collections: CollectionsModel;
 }
 
 const INITAL_STATE: InitStateShop = {
