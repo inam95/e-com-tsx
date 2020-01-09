@@ -11,6 +11,7 @@ import {
 } from "../../redux/cart/cart.selector";
 import { ItemModel } from "../../models/ShopPage";
 import { CheckoutItem } from "../../components/checkout-item/checkout-item.component";
+import { StripeCheckoutButton } from "../../components/stripe-button/stripe-button.component";
 
 interface CheckoutPageStoreProps {
   cartItems: ItemModel[];
@@ -49,6 +50,7 @@ const _CheckoutPage: React.FC<CheckoutPageProps> = (
       <div className="total">
         <span>TOTAL: ${total}</span>
       </div>
+      <StripeCheckoutButton price={total} />
     </div>
   );
 };
