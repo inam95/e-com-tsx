@@ -9,15 +9,15 @@ export const StripeCheckoutButton: React.FC<StripeCheckoutProps> = ({
   price
 }: StripeCheckoutProps) => {
   const priceFroStrpe = price * 100;
-  const publishableKey = "pk_live_zxPlSCXn4MBhXd00VBv1gFO600pQuPc863";
+  const publishableKey = "pk_test_BhXFkrq8aY1gPC7GHbAnI4Wi00XpVRBMQY";
 
-  const onToken = (token: any) => {
+  const onToken = (token: any): void => {
     console.log(token);
     alert("Success");
   };
   return (
     <StripeCheckout
-      label="PAy Now"
+      label="Pay Now"
       name="MY SHOP Ltd"
       billingAddress
       shippingAddress
