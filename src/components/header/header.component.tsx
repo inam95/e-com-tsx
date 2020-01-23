@@ -1,18 +1,23 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
 
-import { ReactComponent as Logo } from "../../assets/crown.svg.svg";
-import { CartIcon } from "../cart-icon/cart-icon.component";
+import { ReactComponent as Logo } from '../../assets/crown.svg.svg';
+import { CartIcon } from '../cart-icon/cart-icon.component';
 
-import "./header.styles.scss";
-import { auth } from "../../services/firebase/firebase.util";
-import { UserAuthModel } from "../../models/Auth";
-import { connect } from "react-redux";
-import { StoreState } from "../../redux/root-reducer";
-import CartDropdown from "../cart-dropdown/cart-dropdown.component";
-import { selectCurrentUser } from "../../redux/user/user.selector";
-import { selectCartHidden } from "../../redux/cart/cart.selector";
-import { createStructuredSelector } from "reselect";
+import { auth } from '../../services/firebase/firebase.util';
+import { UserAuthModel } from '../../models/Auth';
+import { connect } from 'react-redux';
+import { StoreState } from '../../redux/root-reducer';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+import { selectCurrentUser } from '../../redux/user/user.selector';
+import { selectCartHidden } from '../../redux/cart/cart.selector';
+import { createStructuredSelector } from 'reselect';
+
+import {
+  HeaderContainer,
+  LogoContainer,
+  OptionsContainer,
+  OptionLink
+} from './header.styles';
 
 interface HeaderStoreProps {
   currentUser?: UserAuthModel | null;
@@ -25,30 +30,24 @@ const _Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   const { currentUser, hiddenCart } = props;
 
   return (
-    <div className="header">
-      <Link className="logo-container" to="/">
+    <HeaderContainer>
+      <LogoContainer to="/">
         <Logo className="logo"></Logo>
-      </Link>
-      <div className="options">
-        <Link className="option" to="/shop">
-          SHOP
-        </Link>
-        <Link className="option" to="/contact">
-          CONTACT
-        </Link>
+      </LogoContainer>
+      <OptionsContainer>
+        <OptionLink to="/shop">SHOP</OptionLink>
+        <OptionLink to="/contact">CONTACT</OptionLink>
         {currentUser ? (
-          <div className="option" onClick={() => auth.signOut()}>
+          <OptionLink as="div" onClick={() => auth.signOut()}>
             SIGN OUT
-          </div>
+          </OptionLink>
         ) : (
-          <Link className="option" to="/signin">
-            SIGN IN
-          </Link>
+          <OptionLink to="/signin">SIGN IN</OptionLink>
         )}
         <CartIcon />
-      </div>
+      </OptionsContainer>
       {hiddenCart ? null : <CartDropdown />}
-    </div>
+    </HeaderContainer>
   );
 };
 
